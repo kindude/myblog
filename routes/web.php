@@ -22,6 +22,15 @@ Route::get('posts', function(){
     return view('posts');
 });
 
-Route::get('post', function(){
-    return view('post');
+Route::get('posts/{post}', function($slug){
+    $path = __DIR__ . "/../resources/posts/{$slug}.html";
+    if (!file_exists($path)) {
+        dd("File not found: " . $path);
+    }
+
+    $post = file_get_contents($path);
+    ddd($post);
+    return view('post', [
+        'post' => $post,
+    ]);
 });
