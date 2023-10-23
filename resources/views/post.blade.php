@@ -9,7 +9,8 @@
 </head>
 <body>
     <section>
-        <?php $post; ?>
+    <h1> {!! $post->title !!}</h1>
+    <div> {!! $post->body !!}</div>
     </section>
     <a href="/posts">Go back</a>
 </body>
