@@ -17,10 +17,7 @@ use Illuminate\Support\Facades\File;
 
 Route::get('/', function () {
 
-    $document = 
-    // return view('welcome');
-
-    ddd($document->body());
+    return view('welcome');
 });
 
 
@@ -33,6 +30,6 @@ Route::get('posts', function () {
 
 Route::get('posts/{post}', function($slug){
 
-    return view('post', ['post' => Post::find($slug)]);
+    return view('post', ['post' => Post::findOrFail($slug)]);
     
-})->where('post', '[A-z_\-]+');
+});

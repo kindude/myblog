@@ -29,17 +29,18 @@ class Post
 
     public static function allFiles()
     {
-
-        return collect(File::files(base_path("resources/posts")))
-        ->map(fn($file) => YamlFrontMatter::parseFile($file))
-        ->map(fn($document) => new Post(
-            $document->title,
-            $document->excerpt,
-            $document->date,
-            (string) $document->body(),
-            $document->slug
-
-        ));
+        return cache()->rememberForever('posts.all', function(){
+            return collect(File::files(base_path("resources/posts")))
+            ->map(fn($file) => YamlFrontMatter::parseFile($file))
+            ->map(fn($document) => new Post(
+                $document->title,
+                $document->excerpt,
+                $document->date,
+                (string) $document->body(),
+                $document->slug
+            ))
+            ->sortByDesc('date');
+        });
 
     }
 
@@ -47,5 +48,14 @@ class Post
     public static function find($slug)
     {
        return static::allFiles()->firstWhere('slug', $slug);
+    }
+
+    public static function findOrFail($slug)
+    {
+        $post = static::find($slug);
+        if (! $post){
+            throw new ModelNotFoundException;
+        }
+       return $post;
     }
 }
