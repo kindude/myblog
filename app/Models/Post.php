@@ -16,6 +16,7 @@ class Post extends Model
 //        'body',
 //    ];
 
+    protected $with = ['category', 'author'];
     public function getRouteKeyName()
     {
         return 'slug';
@@ -23,5 +24,9 @@ class Post extends Model
 
     public function category(){
         return $this->belongsTo(Category::class);
+    }
+
+    public function author(){
+        return $this->belongsTo(User::class, 'user_id');
     }
 }
