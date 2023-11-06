@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostCommentsController;
+use App\Http\Controllers\PostController;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
@@ -32,6 +35,12 @@ Route::get('posts', function () {
     ]);
 });
 
+Route::get('posts/create-post', [PostController::class, 'show']) -> middleware('auth');
+
+
+Route::post('posts/create-post', [PostController::class, 'store']) ->middleware('auth');
+
+
 Route::get('posts/{post}', function (Post $post) {
 
     return view('posts.post', [
@@ -54,11 +63,6 @@ Route::get('authors/{author}', function (User $author) {
     ]);
 });
 
-
-Route::get('posts/create-post', function () {
-    return view('create-post');
-});
-
 Route::get('register', [RegisterController::class, 'create'])->middleware('guest');
 Route::post('register', [RegisterController::class, 'store'])->middleware('guest');
 
@@ -68,5 +72,7 @@ Route::get('login', [Sessionscontroller::class, 'create'])->middleware('guest');
 Route::post('sessions', [SessionsController::class, 'store']);
 
 
-
 Route::post('posts/{post:slug}/comments', [PostCommentsController::class, 'store'])->middleware('auth');
+
+
+Route::post('add-category', [CategoryController::class, 'store'])->middleware('auth');

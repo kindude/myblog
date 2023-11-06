@@ -9,11 +9,6 @@ p {
     line-height: 1.6;
 }
 
-article + article {
-    margin-top: 3rem;
-    padding-top: 3rem;
-    border-top: 1px solid #c5c5c5;
-}
 body {
     display: flex;
     flex-direction: column;
@@ -22,4 +17,16 @@ body {
 
 .container {
     flex: 1; /* Allow the content to grow and fill available space */
+}
+
+
+/* Hide text by default */
+.text-sm {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Show text on hover */
+a:hover .text-sm {
+    opacity: 1;
 }

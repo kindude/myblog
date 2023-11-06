@@ -24,9 +24,12 @@ class PostFactory extends Factory
             'title' => fake() -> sentence,
             'slug' => fake() -> slug,
             'excerpt' => fake() -> sentence,
-            'body' => '<p>' . fake() ->paragraph . '</p>',
-            'published_at' => fake() -> dateTime
+            'body' => '<p>' . fake() ->paragraph . fake() ->paragraph . '</p> ',
+            'published_at' => fake() -> dateTime,
+            'image_url' => fake() -> imageUrl
 
         ];
     }
+
+
 }
