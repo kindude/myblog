@@ -20,13 +20,13 @@
         <div class="flex">
             <ul class="flex space-x-10">
                 <li class="text-l font-bold uppercase hover:text-gray-400 hover:text-xl transition-transform transform hover:scale-110">
-                    <a href="/" class="{{ Request::is('/') ? 'text-blue-700' : '' }}">Home</a>
+                    <a href="/" class="{{ Request::is('/') ? 'text-gray-300' : '' }}">Home</a>
                 </li>
                 <li class="text-l font-bold uppercase hover:text-gray-400 hover:text-xl transition-transform transform hover:scale-110">
-                    <a href="/posts" class="{{ Request::is('posts') ? 'text-blue-700' : '' }}">Posts</a>
+                    <a href="/posts" class="{{ Request::is('posts') ? 'text-gray-300' : '' }}">Posts</a>
                 </li>
                 <li class="text-l font-bold uppercase hover:text-gray-400 hover:text-xl transition-transform transform hover:scale-110">
-                    <a href="/about" class="{{ Request::is('about') ? 'text-blue-700' : '' }}">About</a>
+                    <a href="/about" class="{{ Request::is('about') ? 'text-gray-300' : '' }}">About</a>
                 </li>
             </ul>
         </div>

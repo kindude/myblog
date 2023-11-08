@@ -3,8 +3,7 @@
 <article class="transition-colors duration-300 hover:bg-gray-100 border border-black border-opacity-0 hover:border-opacity-5 rounded-xl max-w-md">
     <div class="py-6 px-5 flex flex-col h-full">
         <div class="flex flex-col items-center">
-            <img src="{{ '/storage/app/' . $post->image_url }}" alt="{{ $post->title }}" class="w-full h-60 object-cover object-center mb-2">
-
+            <img src="{{ Storage::disk('dropbox')->url($post->image_url) }}" alt="{{ $post->title }}" class="w-full h-60 object-cover object-center mb-2">
         </div>
 
         <div class="mt-8 flex flex-col justify-between flex-grow">

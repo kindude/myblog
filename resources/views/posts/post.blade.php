@@ -4,15 +4,30 @@
         <main class="max-w-6xl mx-auto mt-10 lg:mt-20 space-y-6">
             <article class="max-w-4xl mx-auto">
                 <h1 class="text-3xl font-bold mb-4">{!! $post->title !!}</h1>
+
+                <div class="flex flex-col items-center">
+                    <img src="{{ Storage::disk('dropbox')->url($post->image_url) }}" alt="{{ $post->title }}" class="w-full h-full object-cover object-center mb-2">
+                </div>
+
                 <p class="text-gray-600 text-sm mb-2">
                     By <a href="/authors/{{ $post->author->username }}" class="text-blue-500 hover:underline">{{ $post->author->name }}</a>
                     in <a href="/categories/{{ $post->category->slug }}" class="text-blue-500 hover:underline">{{ $post->category->name }}</a>
                 </p>
-                <div class="text-gray-800">
+                <div class="text-gray-800 max-w-2xl">
                     {!! $post->body !!}
                 </div>
                 <a href="/posts" class="mt-4 inline-block text-blue-500 hover:underline">Go back</a>
             </article>
+            @if($post->author->id == auth()->id())
+                <div>
+                    <a href="/posts/delete/{{ $post->id }}" class="bg-red-500 text-white uppercase font-semibold text-xs py-2 px-10 rounded-2xl hover:bg-red-700">Delete</a>
+                </div>
+                <div>
+                    <a href="/posts/update/{{ $post ->slug }}" class="bg-green-500 text-white uppercase font-semibold text-xs py-2 px-10 rounded-2xl hover:bg-green-700">Update</a>
+                </div>
+
+            @endif
+
         </main>
     </section>
 

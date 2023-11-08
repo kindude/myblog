@@ -76,3 +76,16 @@ Route::post('posts/{post:slug}/comments', [PostCommentsController::class, 'store
 
 
 Route::post('add-category', [CategoryController::class, 'store'])->middleware('auth');
+
+
+Route::get('posts/delete/{id}', [PostController::class, 'destroy']) -> middleware('auth');
+
+Route::get('posts/update/{post}', function(Post $post){
+    $categories = Category::all();
+   return view('posts.update-post', [
+       'post' => $post,
+       'categories' => $categories
+   ]);
+});
+
+

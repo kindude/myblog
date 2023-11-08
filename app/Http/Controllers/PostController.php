@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Post;
+use Spatie\Dropbox\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class PostController extends Controller
@@ -30,12 +32,24 @@ class PostController extends Controller
             'category_id' => ['required'],
         ]);
 
+        $attributes['body'] = '<b>' . $attributes['body'] . '</b>';
 
-        if (request()->hasFile('image')) {
-            $upload = request()->file('image');
-            $path = $upload->store('uploads');
-            $attributes['image_url'] = $path;
-        }
+
+//        if (request()->hasFile('image')) {
+//            $upload = request()->file('image');
+//            $path = $upload->store('uploads');
+//            $attributes['image_url'] = $path;
+//        }
+
+
+
+        $path = Storage::disk('dropbox')->putFileAs(
+            '/uploads', request()->file('image'), request()->file('image')->getClientOriginalName()
+        );
+
+        $path = Storage::disk('dropbox')->put('/uploads', request()->file('image'));
+
+        $attributes['image_url'] = $path;
 
         $attributes['user_id'] = auth()->id();
 
@@ -45,6 +59,14 @@ class PostController extends Controller
         Post::create($attributes);
 
         return redirect('/posts');
+    }
+
+    public function destroy($id)
+    {
+        $post = Post::findOrFail($id);
+        $post->delete();
+
+        return redirect('/posts')->with('success', 'Post has been deleted');
     }
 
 }
