@@ -32,8 +32,6 @@ class PostController extends Controller
             'category_id' => ['required'],
         ]);
 
-        $attributes['body'] = '<b>' . $attributes['body'] . '</b>';
-
 
 //        if (request()->hasFile('image')) {
 //            $upload = request()->file('image');
@@ -41,11 +39,9 @@ class PostController extends Controller
 //            $attributes['image_url'] = $path;
 //        }
 
-
-
-        $path = Storage::disk('dropbox')->putFileAs(
-            '/uploads', request()->file('image'), request()->file('image')->getClientOriginalName()
-        );
+//        $path = Storage::disk('dropbox')->putFileAs(
+//            '/uploads', request()->file('image'), request()->file('image')->getClientOriginalName()
+//        );
 
         $path = Storage::disk('dropbox')->put('/uploads', request()->file('image'));
 
@@ -53,7 +49,8 @@ class PostController extends Controller
 
         $attributes['user_id'] = auth()->id();
 
-        $attributes['excerpt'] = Str::limit($attributes['body'], 150, '...');
+        $attributes['excerpt'] = '<p>' . Str::limit($attributes['body'], 150, '...') . '</p>';
+        $attributes['excerpt'] = str_replace('"', '', $attributes['excerpt']);
         $attributes['slug'] = Str::slug($attributes['title'], '-');
 
         Post::create($attributes);

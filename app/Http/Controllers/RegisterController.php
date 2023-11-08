@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
 class RegisterController extends Controller
@@ -25,6 +26,9 @@ class RegisterController extends Controller
             'email' => ['required', 'email', 'max:255', Rule::unique('users', 'email')],
             'password' => ['required', 'min:7', 'max:255']
         ]);
+
+        $path = Storage::disk('dropbox')->put('/avatars', request()->file('image'));
+        $attributes['avatar_url'] = $path;
 
         $user = User::create($attributes);
 

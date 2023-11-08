@@ -13,8 +13,8 @@
                     By <a href="/authors/{{ $post->author->username }}" class="text-blue-500 hover:underline">{{ $post->author->name }}</a>
                     in <a href="/categories/{{ $post->category->slug }}" class="text-blue-500 hover:underline">{{ $post->category->name }}</a>
                 </p>
-                <div class="text-gray-800 max-w-2xl">
-                    {!! $post->body !!}
+                <div class="text-gray-800 max-w-6xl">
+                    <p>{!! $post->body !!}</p>
                 </div>
                 <a href="/posts" class="mt-4 inline-block text-blue-500 hover:underline">Go back</a>
             </article>
@@ -37,7 +37,7 @@
             <form method="post" action="/posts/{{ $post -> slug }}/comments">
                 @csrf
                 <header class="flex items-center">
-                    <img src="https://i.pravatar.cc/100" alt="" class="w-12 h-12 rounded-full">
+                    <img src="{{ Storage::disk('dropbox')->url($post->author->avatar_url) }}" alt="" class="w-12 h-12 rounded-full">
                     <h2 class="ml-4">Want to leave a comment ? </h2>
 
                 </header>

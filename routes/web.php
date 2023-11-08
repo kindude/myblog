@@ -3,7 +3,6 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostCommentsController;
 use App\Http\Controllers\PostController;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
@@ -30,9 +29,16 @@ Route::get('/', function () {
 
 Route::get('posts', function () {
 
-    return view('posts.posts', [
-        'posts' => Post::latest('published_at')->with(['category', 'author'])->get()
-    ]);
+    $posts = Post::latest('published_at')->with(['category', 'author'])->get();
+    if(!$posts -> isEmpty()) {
+
+        return view('posts.posts', [
+            'posts' => $posts
+        ]);
+    }
+    else{
+        return view('components.notfound');
+    }
 });
 
 Route::get('posts/create-post', [PostController::class, 'show']) -> middleware('auth');
@@ -51,16 +57,28 @@ Route::get('posts/{post}', function (Post $post) {
 
 
 Route::get('categories/{category}', function (Category $category) {
-    return view('posts.posts', [
-        'posts' => $category->posts
-    ]);
+    if (!$category->posts->isEmpty()) {
+        return view('posts.posts', [
+            'posts' => $category->posts
+        ]);
+    }
+    else{
+        return view('components.notfound');
+    }
 });
 
 
 Route::get('authors/{author}', function (User $author) {
-    return view('posts.posts', [
-        'posts' => $author->posts
-    ]);
+    if(!$author -> posts -> isEmpty()) {
+
+        return view('posts.posts', [
+            'posts' => $author->posts
+        ]);
+    }
+    else
+    {
+        return view('components.notfound');
+    }
 });
 
 Route::get('register', [RegisterController::class, 'create'])->middleware('guest');
@@ -82,10 +100,10 @@ Route::get('posts/delete/{id}', [PostController::class, 'destroy']) -> middlewar
 
 Route::get('posts/update/{post}', function(Post $post){
     $categories = Category::all();
-   return view('posts.update-post', [
-       'post' => $post,
-       'categories' => $categories
-   ]);
+    return view('posts.update-post', [
+        'post' => $post,
+        'categories' => $categories
+    ]);
 });
 
 
