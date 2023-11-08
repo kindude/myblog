@@ -42,7 +42,11 @@ class PostController extends Controller
 //        $path = Storage::disk('dropbox')->putFileAs(
 //            '/uploads', request()->file('image'), request()->file('image')->getClientOriginalName()
 //        );
-        $path = request('image')->store('uploads');
+
+        // $path = Storage::disk('local')->put('uploads' ,  request()->file('image'));
+        $path = request()->file('image')->store('uploads', 'public');
+        $path = storage_path('app/public/' . $path);
+        //$path = request('image')->store('uploads');
 //        $path = Storage::disk('dropbox')->put('/uploads', request()->file('image'));
 
         $attributes['image_url'] = $path;
