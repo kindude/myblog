@@ -6,7 +6,7 @@
                 <h1 class="text-3xl font-bold mb-4">{!! $post->title !!}</h1>
 
                 <div class="flex flex-col items-center">
-                    <img src="{{ Storage::disk('dropbox')->url($post->image_url) }}" alt="{{ $post->title }}" class="w-full h-full object-cover object-center mb-2">
+                    <img src="{{ asset( 'storage/app/' . $post->image_url ) }}" alt="{{ $post->title }}" class="w-full h-full object-cover object-center mb-2">
                 </div>
 
                 <p class="text-gray-600 text-sm mb-2">
@@ -37,7 +37,7 @@
             <form method="post" action="/posts/{{ $post -> slug }}/comments">
                 @csrf
                 <header class="flex items-center">
-                    <img src="{{ Storage::disk('dropbox')->url($post->author->avatar_url) }}" alt="" class="w-12 h-12 rounded-full">
+{{--                    <img src="{{ Storage::disk('dropbox')->url($post->author->avatar_url) }}" alt="" class="w-12 h-12 rounded-full">--}}
                     <h2 class="ml-4">Want to leave a comment ? </h2>
 
                 </header>
