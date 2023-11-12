@@ -24,7 +24,9 @@
             </header>
             <main>
                 <div class="text-sm mt-2 flex-grow text-black-500">
+                    <p>
                         {{ $post->excerpt }}
+                    </p>
                 </div>
             </main>
             <footer class="flex justify-between items-center mt-4">

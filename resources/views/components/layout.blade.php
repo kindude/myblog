@@ -49,27 +49,25 @@
 
 </header>
 
-<main {{ $attributes(['class' => "px-6 py-8 flex-grow"]) }}>
+<main class="px-6 py-8 flex-grow">
     {{ $slot }}
 </main>
-
 <x-flash></x-flash>
-
 <!-- Footer -->
-<footer class="bg-gray-700 text-white p-4">
-
-        <div class="container mx-auto flex justify-between">
-            <div>
-                &copy; 2023 Your Blog
-            </div>
-            <div>
-                <form action="/contact" method="post">
-                    <input type="email" name="email" placeholder="Your Email" class="rounded-l py-2 px-3 focus:outline-none" required>
-                    <button type="submit" class="bg-blue-500 text-white rounded-r py-2 px-3 hover:bg-blue-600 focus:outline-none">Contact Me</button>
-                </form>
-            </div>
+<footer class="bg-gray-700 text-white p-4 sticky bottom-0">
+    <div class="container mx-auto flex justify-between">
+        <div>
+            &copy; 2023 Your Blog
         </div>
-    </footer>
+        <div>
+            <form action="/contact" method="post">
+                <input type="email" name="email" placeholder="Your Email" class="rounded-l py-2 px-3 focus:outline-none" required>
+                <button type="submit" class="bg-blue-500 text-white rounded-r py-2 px-3 hover:bg-blue-600 focus:outline-none">Contact Me</button>
+            </form>
+        </div>
+    </div>
+</footer>
+
 
 </body>
 </html>

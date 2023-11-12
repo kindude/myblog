@@ -27,13 +27,11 @@ class RegisterController extends Controller
             'password' => ['required', 'min:7', 'max:255']
         ]);
 
-//        $path = Storage::disk('dropbox')->put('/avatars', request()->file('image'));
 
         $attributes['avatar_url'] = '#';
 
         $user = User::create($attributes);
 
-        //log in user
 
         auth()->login($user);
 

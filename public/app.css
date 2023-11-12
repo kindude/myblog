@@ -1,19 +1,17 @@
 body {
     background: white;
-    color:black;
-    margin:auto;
+    color: black;
+    margin: auto;
     font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 p {
     line-height: 1.6;
 }
 
-body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
 
 .container {
     flex: 1; /* Allow the content to grow and fill available space */
@@ -22,7 +20,7 @@ body {
 
 /* Hide text by default */
 .text-sm {
-    opacity: 0;
+    opacity: 1;
     transition: opacity 0.3s ease;
 }
 
@@ -30,3 +28,31 @@ body {
 a:hover .text-sm {
     opacity: 1;
 }
+
+/* Add styles for pagination */
+.pagination {
+    position: fixed; /* Fixed position */
+    bottom: 60px; /* Adjust the value to your preference */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Center horizontally */
+    z-index: 1; /* Place above other elements if necessary */
+
+}
+
+.pagination li {
+    margin: 0 5px;
+    display: inline;
+}
+
+.pagination a {
+    color: #007BFF;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.pagination a:hover {
+    text-decoration: underline;
+}
+
+
+/* Add these styles to make the footer sticky */

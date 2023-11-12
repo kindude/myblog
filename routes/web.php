@@ -27,19 +27,7 @@ Route::get('/', function () {
 });
 
 
-Route::get('posts', function () {
-
-    $posts = Post::latest('published_at')->with(['category', 'author'])->get();
-    if(!$posts -> isEmpty()) {
-
-        return view('posts.posts', [
-            'posts' => $posts
-        ]);
-    }
-    else{
-        return view('components.notfound');
-    }
-});
+Route::get('posts', [PostController::class, 'index'])->where('page', '[0-9]+');
 
 Route::get('posts/create-post', [PostController::class, 'show']) -> middleware('auth');
 
@@ -59,7 +47,7 @@ Route::get('posts/{post}', function (Post $post) {
 Route::get('categories/{category}', function (Category $category) {
     if (!$category->posts->isEmpty()) {
         return view('posts.posts', [
-            'posts' => $category->posts
+            'posts' => $category->posts->paginate(2)
         ]);
     }
     else{
@@ -105,5 +93,8 @@ Route::get('posts/update/{post}', function(Post $post){
         'categories' => $categories
     ]);
 });
+
+Route::post('posts/update/{id}', [PostController::class, 'update']) -> middleware('auth');
+
 
 

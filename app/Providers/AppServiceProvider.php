@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\ServiceProvider;
 use Spatie\FlysystemDropbox\DropboxAdapter;
@@ -10,7 +11,6 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Filesystem\FilesystemAdapter;
 use League\Flysystem\Filesystem;
 use Spatie\Dropbox\Client as DropboxClient;
-
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -29,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Model::unguard();
+        Paginator::useTailwind();
         Storage::extend('dropbox', function (Application $app, array $config) {
             $adapter = new DropboxAdapter(new DropboxClient(
                 $config['authorization_token']
