@@ -6,68 +6,53 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/app.css">
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-    <title>Blog</title>
+    <title>Your Portfolio</title>
 </head>
-
-<body class="flex flex-col min-h-screen">
+<body class="font-sans bg-gray-100">
 <!-- Header -->
-<header class="bg-blue-500 p-4 text-white ml-0">
-
-    <nav class="flex justify-between items-center">
-        <div>
-            <a href="/" class="text-2xl font-bold">Your Blog</a>
-        </div>
-        <div class="flex">
-            <ul class="flex space-x-10">
-                <li class="text-l font-bold uppercase hover:text-gray-400 hover:text-xl transition-transform transform hover:scale-110">
-                    <a href="/" class="{{ Request::is('/') ? 'text-gray-300' : '' }}">Home</a>
-                </li>
-                <li class="text-l font-bold uppercase hover:text-gray-400 hover:text-xl transition-transform transform hover:scale-110">
-                    <a href="/posts" class="{{ Request::is('posts') ? 'text-gray-300' : '' }}">Posts</a>
-                </li>
-                <li class="text-l font-bold uppercase hover:text-gray-400 hover:text-xl transition-transform transform hover:scale-110">
-                    <a href="/about" class="{{ Request::is('about') ? 'text-gray-300' : '' }}">About</a>
-                </li>
-            </ul>
-        </div>
-
-        <div class="mt-8 md:mt-0 flex items-center">
+<header class="bg-indigo-600 py-4 text-white shadow-lg">
+    <div class="container mx-auto flex justify-between items-center">
+        <a href="/" class="text-3xl font-bold">Yehor Dudnik</a>
+        <nav class="space-x-6">
+            <a href="/" class="text-lg hover:text-gray-400">Home</a>
+            <a href="/portfolio" class="text-lg hover:text-gray-400">Portfolio</a>
+            <a href="/posts" class="text-lg hover:text-gray-400">Blog</a> <!-- Added "Blog" button -->
+            <a href="/about" class="text-lg hover:text-gray-400">About</a>
+            <a href="/contact" class="text-lg hover:text-gray-400">Contact</a>
+        </nav>
+        <div class="flex space-x-6">
             @guest
-                <a href="/login" class="text-l font-bold uppercase mr-10 hover:text-gray-400 hover:text-xl transition-transform transform hover:scale-110">Log in</a>
-                <a href="/register" class="text-l font-bold uppercase mr-10 hover:text-gray-400 hover:text-xl transition-transform transform hover:scale-110">Register</a>
+                <a href="/login" class="text-lg hover:text-gray-400">Login</a>
+                <a href="/register" class="text-lg hover:text-gray-400">Register</a>
             @endguest
 
             @auth
-                <span class="text-s font-bold uppercase mr-10">Welcome, {{ auth()->user()->name }}</span>
+                <span class="text-lg">Welcome, {{ auth()->user()->name }}</span>
                 <form method="post" action="/logout">
                     @csrf
-                    <button type="submit" class="text-l font-bold uppercase mr-10 hover:text-gray-400 hover:text-xl transition-transform transform hover:scale-110">Log Out</button>
+                    <button type="submit" class="text-lg hover:text-gray-400">Logout</button>
                 </form>
             @endauth
         </div>
-    </nav>
-
+    </div>
 </header>
 
-<main class="px-6 py-8 flex-grow">
+<!-- Main Content -->
+<main class="container mx-auto py-10">
     {{ $slot }}
 </main>
-<x-flash></x-flash>
+
 <!-- Footer -->
-<footer class="bg-gray-700 text-white p-4 sticky bottom-0">
-    <div class="container mx-auto flex justify-between">
+<footer class="bg-gray-900 text-white py-4">
+    <div class="container mx-auto flex justify-between items-center">
         <div>
-            &copy; 2023 Your Blog
+            &copy; 2023 Yehor Dudnik
         </div>
-        <div>
-            <form action="/contact" method="post">
-                <input type="email" name="email" placeholder="Your Email" class="rounded-l py-2 px-3 focus:outline-none" required>
-                <button type="submit" class="bg-blue-500 text-white rounded-r py-2 px-3 hover:bg-blue-600 focus:outline-none">Contact Me</button>
-            </form>
-        </div>
+        <form action="/contact" method="post" class="flex space-x-2">
+            <input type="email" name="email" placeholder="Your Email" class="rounded-full py-2 px-3 focus:outline-none bg-gray-700 text-white">
+            <button type="submit" class="bg-indigo-600 text-white rounded-full py-2 px-6 hover:bg-indigo-700 focus:outline-none">Contact Me</button>
+        </form>
     </div>
 </footer>
-
-
 </body>
 </html>

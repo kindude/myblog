@@ -13,7 +13,7 @@
                 </div>
             @endforeach
         </div>
-        <div class="mb-0 text-gray-700 border border-gray-500">
+        <div class="mb-0 text-gray-700">
             {{ $posts->appends(['page' => $posts->currentPage()])->links() }}
         </div>
     </div>

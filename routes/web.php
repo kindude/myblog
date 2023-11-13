@@ -96,5 +96,10 @@ Route::get('posts/update/{post}', function(Post $post){
 
 Route::post('posts/update/{id}', [PostController::class, 'update']) -> middleware('auth');
 
-
+Route::get('/profile', function(){
+    $user = auth()->user();
+    return view('profile.myprofile', [
+       'user'=> $user
+   ]);
+}) ->middleware('auth');
 

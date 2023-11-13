@@ -23,15 +23,16 @@ class PostController extends Controller
 
     public function index(Request $request)
     {
-        $perPage = 1;
+        $perPage = 6;
         $page = $request->query('page', 1);
 
         $posts = Post::latest('published_at')
             ->with(['category', 'author'])
-            ->simplePaginate($perPage, ['*'], 'page', $page);
+            ->paginate($perPage, ['*'], 'page', $page);
 
         return view('posts.posts', [
             'posts' => $posts,
+            'page' => 1,
         ]);
     }
 

@@ -6,7 +6,7 @@
                 <h1 class="text-3xl font-bold mb-4">{!! $post->title !!}</h1>
 
                 <div class="flex flex-col items-center">
-                    <img src="{{ asset( 'storage/app/' . $post->image_url ) }}" alt="{{ $post->title }}" class="w-full h-full object-cover object-center mb-2">
+                    <img src="{{ asset('storage/' . $post->image_url) }}" alt="{{ $post->title }}" class="w-full h-full object-cover object-center mb-2">
                 </div>
 
                 <p class="text-gray-600 text-sm mb-2">
