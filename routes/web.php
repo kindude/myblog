@@ -45,16 +45,16 @@ Route::get('posts/{post}', function (Post $post) {
 
 
 Route::get('categories/{category}', function (Category $category) {
-    if (!$category->posts->isEmpty()) {
-        return view('posts.posts', [
-            'posts' => $category->posts->paginate(2)
-        ]);
-    }
-    else{
+    $posts = $category->posts()->paginate(2);
+
+    if ($posts->isEmpty()) {
         return view('components.notfound');
     }
-});
 
+    return view('posts.posts', [
+        'posts' => $posts
+    ]);
+});
 
 Route::get('authors/{author}', function (User $author) {
     if(!$author -> posts -> isEmpty()) {
