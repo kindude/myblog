@@ -37,7 +37,7 @@
 
                 <div class="mb-4">
                     <label for="image" class="block text-gray-700">Image</label>
-                    <input type="file" id="image" name="image" accept="image/*" class="w-full px-4 py-2 border rounded focus:outline-none" required value="{{ old('image') }}">
+                    <input type="file" id="image" name="image" accept="image/*" class="w-full px-4 py-2 border rounded focus:outline-none" value="{{ old('image') }}">
                 </div>
 
                 <div>

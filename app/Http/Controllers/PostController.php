@@ -51,7 +51,7 @@ class PostController extends Controller
         $attributes['image_url'] = $path;
         $attributes['user_id'] = auth()->id();
 
-        $attributes['excerpt'] = '<p>' . Str::limit($attributes['body'], 150, '...') . '</p>';
+        $attributes['excerpt'] = Str::limit($attributes['body'], 150, '...') ;
         $attributes['slug'] = Str::slug($attributes['title'], '-');
 
         Post::create($attributes);
