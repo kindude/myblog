@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostCommentsController;
 use App\Http\Controllers\PostController;
@@ -23,7 +24,7 @@ use App\Models\User;
 
 Route::get('/', function () {
 
-    return view('welcome');
+    return view('home.index');
 });
 
 
@@ -96,10 +97,35 @@ Route::get('posts/update/{post}', function(Post $post){
 
 Route::post('posts/update/{id}', [PostController::class, 'update']) -> middleware('auth');
 
-Route::get('/profile', function(){
+
+Route::get('/profile', function() {
     $user = auth()->user();
     return view('profile.myprofile', [
-       'user'=> $user
-   ]);
+        'user'=> $user
+    ]);
 }) ->middleware('auth');
+
+
+// Contacts
+Route::get('/contact', function(){
+    return view('contact.index');
+});
+
+// Home
+Route::get('/home', function(){
+    return view('home.index');
+});
+
+// Portfolio
+Route::get('/portfolio', function (){
+   return view('portfolio.index');
+});
+
+// About
+Route::get('/about', function(){
+    return view('about.index');
+});
+
+// Users
+Route::get('/admin', [AdminController::class, 'index']) ->middleware('admin');
 

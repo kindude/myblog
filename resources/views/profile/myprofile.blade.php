@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="p-4 bg-white rounded-lg shadow-md">
+    <div class="p-4 bg-white rounded-sm shadow-md">
         <div class="flex justify-center">
             <img src="{{ $user->avatar_url ? $user->avatar_url : asset('storage/public/uploads/Blank-Avatar.png') }}" alt="User Avatar" class="w-32 h-32 rounded-full">
         </div>

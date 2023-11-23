@@ -43,12 +43,12 @@
 
             @if($post->author->id == auth()->id())
                 <div>
-                    <a href="/posts/delete/{{ $post->id }}" class="bg-red-500 text-white uppercase font-semibold text-xs py-2 px-10 rounded-2xl hover:bg-red-700">Delete</a>
+                    <a href="/posts/delete/{{ $post->id }}" class="bg-red-500 text-white uppercase font-semibold text-xs py-2 px-10 mb-8 rounded-2xl hover:bg-red-700">Delete</a>
                 </div>
 
             @endif
             <div>
-                <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none">Update Post</button>
+                <button type="submit" class="bg-blue-500 mt-8 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none">Update Post</button>
             </div>
         </form>
     </div>
