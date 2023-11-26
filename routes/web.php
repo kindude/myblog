@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostCommentsController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\MailController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
@@ -58,16 +59,16 @@ Route::get('categories/{category}', function (Category $category) {
 });
 
 Route::get('authors/{author}', function (User $author) {
-    if(!$author -> posts -> isEmpty()) {
+    $posts = $author->posts()->paginate(2);
 
-        return view('posts.posts', [
-            'posts' => $author->posts
-        ]);
-    }
-    else
-    {
+    if($posts->isEmpty()){
         return view('components.notfound');
     }
+
+    return view('posts.posts', [
+        'posts' => $posts
+    ]);
+
 });
 
 Route::get('register', [RegisterController::class, 'create'])->middleware('guest');
@@ -129,3 +130,12 @@ Route::get('/about', function(){
 // Users
 Route::get('/admin', [AdminController::class, 'index']) ->middleware('admin');
 
+// Contact Form
+
+Route::get('/contact-form', function(){
+    return view('contact.contact-form');
+});
+
+//Sending Contact Form
+
+Route::post('send-form', [MailController::class, 'sendEmail']);

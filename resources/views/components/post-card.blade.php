@@ -31,7 +31,11 @@
             </main>
             <footer class="flex justify-between items-center mt-4">
                 <div class="flex items-center text-sm">
-                    <img src="#" alt="Avatar">
+                    @if ($post->author->avatar_url != '#')
+                        <img src="{{ $user->avatar_url }}" alt="User Avatar" class="w-4 h-4 rounded-full">
+                    @else
+                        <img src="{{ asset('storage/public/uploads/Blank-Avatar.png') }}" alt="User Avatar" class="w-4 h-4 rounded-full">
+                    @endif
                     <div class="ml-3">
                         <h5 class="font-bold">{{ $post->author->name }}</h5>
                     </div>
@@ -41,6 +45,7 @@
                     <a href="/posts/{{ $post->slug }}" class="transition-colors duration-300 text-xs font-semibold bg-gray-200 hover:bg-gray-300 rounded-full py-2 px-8">Read More</a>
                 </div>
             </footer>
+
         </div>
     </div>
 </article>

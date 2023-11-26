@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="icon" href="{{ asset('storage/public/uploads/icon.png') }}" type="image/png" sizes="16x16">
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon"></script>
-    <title>Your Portfolio</title>
+    <title>My Blog</title>
 </head>
-<body class="font-sans bg-gray-100">
+<body class="flex flex-col min-h-screen font-sans bg-gray-100">
 <!-- Header -->
 <header class="bg-indigo-600 py-4 text-white shadow-lg">
     <div class="container mx-auto flex justify-between items-center">
@@ -43,7 +44,9 @@
 </header>
 
 <!-- Main Content -->
-<main class="container mx-auto py-10">
+<main class="container mx-auto py-10 flex-grow">
+<x-flash>
+</x-flash>
     {{ $slot }}
 </main>
 
@@ -53,8 +56,7 @@
         <div>
             &copy; 2023 Yehor Dudnik
         </div>
-        <form action="/contact" method="post" class="flex space-x-2">
-            <input type="email" name="email" placeholder="Your Email" class="rounded-full py-2 px-3 focus:outline-none bg-gray-700 text-white">
+        <form action="/contact-form" method="get" class="flex space-x-2">
             <button type="submit" class="bg-indigo-600 text-white rounded-full py-2 px-6 hover:bg-indigo-700 focus:outline-none">Contact Me</button>
         </form>
     </div>

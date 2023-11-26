@@ -1,8 +1,12 @@
 <x-layout>
     <div class="p-4 bg-white rounded-sm shadow-md">
-        <div class="flex justify-center">
-            <img src="{{ $user->avatar_url ? $user->avatar_url : asset('storage/public/uploads/Blank-Avatar.png') }}" alt="User Avatar" class="w-32 h-32 rounded-full">
-        </div>
+    <div class="flex justify-center">
+        @if ($user->avatar_url != '#')
+            <img src="{{ $user->avatar_url }}" alt="User Avatar" class="w-32 h-32 rounded-full">
+        @else
+            <img src="{{ asset('storage/public/uploads/Blank-Avatar.png') }}" alt="User Avatar" class="w-32 h-32 rounded-full">
+        @endif
+    </div>
 
         <div class="mt-4 text-center">
             <h2 class="text-2xl font-semibold">{{ $user->username }}</h2>

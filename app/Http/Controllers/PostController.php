@@ -29,6 +29,10 @@ class PostController extends Controller
         $posts = Post::latest('published_at')
             ->with(['category', 'author'])
             ->paginate($perPage, ['*'], 'page', $page);
+        
+        if ($posts->isEmpty()){
+            return view('components.notfound');
+        }
 
         return view('posts.posts', [
             'posts' => $posts,
@@ -75,7 +79,7 @@ class PostController extends Controller
         $attributes['image_url'] = 'uploads/' . basename($path);
         $attributes['image_url'] = $path;
 
-        $attributes['excerpt'] = '<p>' . Str::limit($attributes['body'], 150, '...') . '</p>';
+        $attributes['excerpt'] = Str::limit($attributes['body'], 150, '...');
         $attributes['slug'] = Str::slug($attributes['title'], '-');
 
         $post->fill($attributes);
