@@ -20,11 +20,12 @@
                 </svg>
                 <p class="text-lg text-green-500">{{ $user->email }}</p>
             </div>
-            @if ($user->is_verified_email)
-                <p class="text-sm text-gray-600">Email Verified</p>
-            @else
-                <p class="text-sm text-red-600">Email Not Verified</p>
-            @endif
+            <div class="bg-gray-100 p-4 rounded-md shadow-md">
+                <p class="text-xl font-semibold">{{ $user->name }}</p>
+                <p class="text-gray-500 text-sm">
+                    Member since {{ $user->created_at->format('F j, Y') }}
+                </p>
+            </div>
         </div>
     </div>
 </x-layout>

@@ -24,7 +24,7 @@
             </header>
             <main>
                 <div class="text-sm mt-2 flex-grow text-black-500">
-                    <p>
+                    <p style="white-space: pre-line;">
                         {{ $post->excerpt }}
                     </p>
                 </div>
@@ -32,7 +32,7 @@
             <footer class="flex justify-between items-center mt-4">
                 <div class="flex items-center text-sm">
                     @if ($post->author->avatar_url != '#')
-                        <img src="{{ $user->avatar_url }}" alt="User Avatar" class="w-4 h-4 rounded-full">
+                        <img src="{{ $post->author->avatar_url }}" alt="User Avatar" class="w-4 h-4 rounded-full">
                     @else
                         <img src="{{ asset('storage/public/uploads/Blank-Avatar.png') }}" alt="User Avatar" class="w-4 h-4 rounded-full">
                     @endif

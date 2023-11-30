@@ -12,7 +12,7 @@
 </head>
 <body class="flex flex-col min-h-screen font-sans bg-gray-100">
 <!-- Header -->
-<header class="bg-indigo-600 py-4 text-white shadow-lg">
+{{-- <header class="bg-indigo-600 py-4 text-white shadow-lg">
     <div class="container mx-auto flex justify-between items-center">
         @if(auth()->user() and auth()->user()->is_admin)
             <a href="/admin">Admin Panel</a>
@@ -41,12 +41,79 @@
             @endauth
         </div>
     </div>
+</header> --}}
+
+<header class="bg-indigo-600 py-4 text-white shadow-lg">
+    <div class="container mx-auto flex justify-between items-center">
+        @if(auth()->user() and auth()->user()->is_admin)
+            <a href="/admin">Admin Panel</a>
+        @endif
+        <a href="/" class="text-3xl font-bold">Yehor Dudnik</a>
+
+        <button id="navbar-toggle" class="block lg:hidden">
+            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+            </svg>
+        </button>
+
+        <nav id="navbar" class="hidden sm:hidden lg:flex lg:space-x-6">            
+            <a href="/home" class="text-lg hover:text-gray-400">Home</a>
+            <a href="/portfolio" class="text-lg hover:text-gray-400">Portfolio</a>
+            <a href="/posts" class="text-lg hover:text-gray-400">Blog</a>
+            <a href="/about" class="text-lg hover:text-gray-400">About</a>
+            <a href="/contact" class="text-lg hover:text-gray-400">Contact</a>
+            <div class="flex space-x-6 pl-16">
+                @guest
+                    <a href="/login" class="text-lg hover:text-gray-400">Login</a>
+                    <a href="/register" class="text-lg hover:text-gray-400">Register</a>
+                @endguest
+    
+                @auth
+                        <span class="text-lg">Welcome, <a href="/profile" class="hover:text-gray-400">{{ auth()->user()->name }}</a></span>
+                    <form method="post" action="/logout">
+                        @csrf
+                        <button type="submit" class="text-lg hover:text-gray-400">Logout</button>
+                    </form>
+                @endauth
+            </div>
+        </nav>
+    </div>
+
+    <div id="dropdown-menu" class="lg:hidden hidden">
+        <a href="/home" class="block py-2 text-lg hover:text-gray-400">Home</a>
+        <a href="/portfolio" class="block py-2 text-lg hover:text-gray-400">Portfolio</a>
+        <a href="/posts" class="block py-2 text-lg hover:text-gray-400">Blog</a>
+        <a href="/about" class="block py-2 text-lg hover:text-gray-400">About</a>
+        <a href="/contact" class="block py-2 text-lg hover:text-gray-400">Contact</a>
+        <div class="flex space-x-6">
+            @guest
+                <a href="/login" class="text-lg hover:text-gray-400">Login</a>
+                <a href="/register" class="text-lg hover:text-gray-400">Register</a>
+            @endguest
+
+            @auth
+                    <span class="text-lg">Welcome, <a href="/profile" class="hover:text-gray-400">{{ auth()->user()->name }}</a></span>
+                <form method="post" action="/logout">
+                    @csrf
+                    <button type="submit" class="text-lg hover:text-gray-400">Logout</button>
+                </form>
+            @endauth
+        </div>
+    </div>
+    <x-flash>
+    </x-flash>
 </header>
+
+<script>
+        document.getElementById('navbar-toggle').addEventListener('click', function () {
+        document.getElementById('dropdown-menu').classList.toggle('hidden');
+    });
+</script>
+
 
 <!-- Main Content -->
 <main class="container mx-auto py-10 flex-grow">
-<x-flash>
-</x-flash>
+
     {{ $slot }}
 </main>
 

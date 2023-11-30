@@ -35,7 +35,8 @@
 
             <div class="mb-4">
                 <label for="image" class="block text-gray-700">Image</label>
-                <input type="file" id="image" name="image" accept="image/*" class="w-full px-4 py-2 border rounded focus:outline-none">
+                <input type="file" id="image" name="image" accept="image/*" class="w-full px-4 py-2 border rounded focus:outline-none" onchange="previewImage(event)">
+                <img id="imagePreview" src="{{ asset('storage/' . $post->image_url) }}" alt="Default Image" style="max-width: 100px; height: auto;">
                 @error('image')
                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                 @enderror
@@ -52,5 +53,28 @@
             </div>
         </form>
     </div>
+
+
+    <script>
+        function previewImage(event) {
+            const input = event.target;
+            const preview = document.getElementById('imagePreview');
+            const inputImage = document.getElementById('image');
+            inputImage.value = '{{ asset('storage/' . $post->image_url) }}';
+
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                preview.src = '{{ asset('storage/' . $post->image_url) }}';
+            }
+        }
+    </script>
+
 </x-layout>
 
