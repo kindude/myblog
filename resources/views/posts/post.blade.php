@@ -18,7 +18,7 @@
                     </div>
                     <a href="/posts" class="mt-4 inline-block text-blue-500 hover:underline">Go back</a>
                 </article>
-                @if($post->author->id == auth()->id())
+                @if(($post->author->id == auth()->id()) || (auth()->user()->is_admin))
                     <div>
                         <a href="/posts/delete/{{ $post->id }}" class="bg-red-500 text-white uppercase font-semibold text-xs py-2 px-10 rounded-2xl hover:bg-red-700">Delete</a>
                     </div>
