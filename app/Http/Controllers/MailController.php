@@ -15,8 +15,9 @@ class MailController extends Controller
         $subject = $request->input('subject');
         $emailContent = $request->input('message');
 
-        Mail::to('tlaravel6@gmail.com')
-            ->send(new ContactFormMail($subject, $emailContent))
-            ->from($senderEmail);
+        Mail::to('sacrifice7355608@gmail.com')
+            ->send(new ContactFormMail($subject, $emailContent, $senderEmail));
+
+        return redirect('/')->with('success', 'Form has been submitted');
     }
 }
