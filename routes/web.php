@@ -131,11 +131,9 @@ Route::get('/about', function(){
 Route::get('/admin', [AdminController::class, 'index']) ->middleware('admin');
 
 // Contact Form
-
 Route::get('/contact-form', function(){
     return view('contact.contact-form');
 });
 
 //Sending Contact Form
-
 Route::post('send-form', [MailController::class, 'sendEmail']);

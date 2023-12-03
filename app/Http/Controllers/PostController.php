@@ -8,6 +8,7 @@ use Spatie\Dropbox\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use App\Rules\ValidImageFilename;
 
 class PostController extends Controller
 {
@@ -50,6 +51,14 @@ class PostController extends Controller
             'category_id' => ['required'],
         ]);
 
+        $validator = \Validator::make(request()->all(), [
+            'image' => [new ValidImageFilename()],
+        ]);
+    
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         $path = request()->file('image')->store('public/uploads', 'public');
         $attributes['image_url'] = 'uploads/' . basename($path);
         $attributes['image_url'] = $path;
@@ -74,6 +83,15 @@ class PostController extends Controller
         request()->validate([
             'image'=> ['required']
         ]);
+
+        $validator = \Validator::make(request()->all(), [
+            'image' => [new ValidImageFilename()],
+        ]);
+    
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
 
         $path = request()->file('image')->store('public/uploads', 'public');
         $attributes['image_url'] = 'uploads/' . basename($path);

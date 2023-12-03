@@ -6,8 +6,6 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="icon" href="{{ asset('storage/public/uploads/icon.png') }}" type="image/png" sizes="16x16">
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon"></script>
     <title>My Blog</title>
 </head>
 <body class="flex flex-col min-h-screen font-sans bg-gray-100">
@@ -21,7 +19,7 @@
         <nav class="space-x-6">
             <a href="/home" class="text-lg hover:text-gray-400">Home</a>
             <a href="/portfolio" class="text-lg hover:text-gray-400">Portfolio</a>
-            <a href="/posts" class="text-lg hover:text-gray-400">Blog</a> <!-- Added "Blog" button -->
+            <a href="/posts" class="text-lg hover:text-gray-400">Blog</a> 
             <a href="/about" class="text-lg hover:text-gray-400">About</a>
             <a href="/contact" class="text-lg hover:text-gray-400">Contact</a>
 
@@ -79,7 +77,7 @@
         </nav>
     </div>
 
-    <div id="dropdown-menu" class="lg:hidden hidden">
+    <div id="dropdown-menu" class="lg:hidden hidden ml-8">
         <a href="/home" class="block py-2 text-lg hover:text-gray-400">Home</a>
         <a href="/portfolio" class="block py-2 text-lg hover:text-gray-400">Portfolio</a>
         <a href="/posts" class="block py-2 text-lg hover:text-gray-400">Blog</a>
